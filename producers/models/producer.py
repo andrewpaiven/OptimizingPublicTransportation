@@ -1,8 +1,6 @@
 """Producer base-class providing common utilites and functionality"""
 import logging
 import time
-import json
-
 
 from confluent_kafka import avro
 from confluent_kafka.admin import AdminClient, NewTopic
@@ -106,7 +104,7 @@ class Producer:
             # Maybe this is not the best idea to wait here.
             # However, better than not having any errors
             # Any suggestions on how to handle this ?
-            time.sleep(5.0)
+            time.sleep(2.0)
             if not self.topic_exists():
                 logger.error(f"Could not create topic {self.topic_name}")
 
