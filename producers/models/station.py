@@ -60,8 +60,8 @@ class Station(Producer):
                 'station_id': self.station_id,
                 'train_id': train.train_id,
                 'direction': direction,
-                'line': self.color,
-                'train_status': train.status,
+                'line': self.color.value,
+                'train_status': train.status.value,
                 'prev_station_id': prev_station_id,
                 'prev_direction': prev_direction
             }
