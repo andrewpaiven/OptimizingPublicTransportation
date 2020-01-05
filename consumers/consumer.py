@@ -39,8 +39,7 @@ class KafkaConsumer:
         self.broker_properties = {
             'bootstrap.servers': 'localhost:9092',
             'client.id': 'cta-consumer',
-            'group.id': f"{topic_name_pattern}",
-            'auto.offset.reset': 'earliest'
+            'group.id': f"webapp_consumer",
         }
 
         # TODO: Create the Consumer, using the appropriate type.
@@ -64,7 +63,8 @@ class KafkaConsumer:
         # the beginning or earliest
         logger.info(f"Assigning partitions to consumer {consumer}")
         for partition in partitions:
-            partition.offset = confluent_kafka.OFFSET_BEGINNING
+            if self.offset_earliest:
+                partition.offset = confluent_kafka.OFFSET_BEGINNING
 
         logger.info("partitions assigned for %s", self.topic_name_pattern)
         consumer.assign(partitions)
@@ -79,7 +79,7 @@ class KafkaConsumer:
 
     def _consume(self):
         """Polls for a message. Returns 1 if a message was received, 0 otherwise"""
-        msg = self.consumer.poll(1.0)
+        msg = self.consumer.poll(self.consume_timeout)
         if msg is None:
             return 0
         elif msg.error():
