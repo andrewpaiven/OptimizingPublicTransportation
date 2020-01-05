@@ -2,7 +2,7 @@
 
 Help with Markdown syntax is available in https://www.jetbrains.com/help/hub/Markdown-Syntax.html
 
-### Step 1: Create Kafka Producers
+### Step 1: Create Kafka Producers - **DONE**
 The first step in our plan is to configure the train stations to emit some of the events that we need. The CTA has placed a sensor on each side of every train station that can be programmed to take an action whenever a train arrives at the station.
 
 To accomplish this, you must complete the following tasks:
@@ -29,26 +29,26 @@ To accomplish this, you must complete the following tasks:
 	* The station emits a `turnstile` event to Kafka whenever the `Turnstile.run()` function is called.
 	* Ensure that events emitted to kafka are paired with the Avro `key` and `value` schemas
 
-### Step 2: Configure Kafka REST Proxy Producer
+### Step 2: Configure Kafka REST Proxy Producer 
 Our partners at the CTA have asked that we also send weather readings into Kafka from their weather hardware. Unfortunately, this hardware is old and we cannot use the Python Client Library due to hardware restrictions. Instead, we are going to use HTTP REST to send the data to Kafka from the hardware using Kafka's REST Proxy.
 
 To accomplish this, you must complete the following tasks:
 
-1. Define a `value` schema for the weather event in `producers/models/schemas/weather_value.json` with the following attributes
+1. Define a `value` schema for the weather event in `producers/models/schemas/weather_value.json` with the following attributes - **DONE**
 	* `temperature`
 	* `status`
-1. Complete the code in `producers/models/weather.py` so that:
+1. Complete the code in `producers/models/weather.py` so that: - **DONE**
 	* A topic is created for weather events
 	* The weather model emits `weather` event to Kafka REST Proxy whenever the `Weather.run()` function is called.
 		* **NOTE**: When sending HTTP requests to Kafka REST Proxy, be careful to include the correct `Content-Type`. Pay close attention to the [examples in the documentation](https://docs.confluent.io/current/kafka-rest/api.html#post--topics-(string-topic_name)) for more information.
 	* Ensure that events emitted to REST Proxy are paired with the Avro `key` and `value` schemas
 
-### Step 3: Configure Kafka Connect
+### Step 3: Configure Kafka Connect - **DONE**
 Finally, we need to extract station information from our PostgreSQL database into Kafka. We've decided to use the [Kafka JDBC Source Connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/index.html).
 
 To accomplish this, you must complete the following tasks:
 
-1. Complete the code and configuration in `producers/connectors.py`
+1. Complete the code and configuration in `producers/connectors.py` - **DONE**
 	* Please refer to the [Kafka Connect JDBC Source Connector Configuration Options](https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/source_config_options.html) for documentation on the options you must complete.
 	* You can run this file directly to test your connector, rather than running the entire simulation.
 	* Make sure to use the [Landoop Kafka Connect UI](http://localhost:8084) and [Landoop Kafka Topics UI](http://localhost:8085) to check the status and output of the Connector.

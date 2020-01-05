@@ -97,20 +97,7 @@ class Weather(Producer):
         try:
             resp.raise_for_status()
         except:
-            print(f"Failed to send data to REST Proxy {json.dumps(resp.json(), indent=2)}")
-            print(json.dumps(
-               {
-                   "key_schema": f"{Weather.key_schema}",
-                   "value_schema": f"{Weather.value_schema}",
-                   "records": [{
-                       "key": f"{self.time_millis()}",
-                       "value": {
-                           "temperature": f"{self.temp}",
-                           "status": f"{self.status.value}"
-                       }
-                   }]
-
-               }, indent=2))
+            logger.error(f"Failed to send data to REST Proxy {json.dumps(resp.json(), indent=2)}")
 
         logger.debug(
             "sent weather data to kafka, temp: %s, status: %s",
