@@ -67,12 +67,12 @@ You must run this Faust processing application with the following command:
 
 `faust -A faust_stream worker -l info`
 
-### Step 5: Configure the KSQL Table
+### Step 5: Configure the KSQL Table - **DONE**
 Next, we will use KSQL to aggregate turnstile data for each of our stations. Recall that when we produced turnstile data, we simply emitted an event, not a count. What would make this data more useful would be to summarize it by station so that downstream applications always have an up-to-date count
 
 To accomplish this, you must complete the following tasks:
 
-1. Complete the queries in `consumers/ksql.py`
+1. Complete the queries in `consumers/ksql.py` - **DONE**
 
 #### Tips
 

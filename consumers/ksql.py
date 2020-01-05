@@ -20,18 +20,21 @@ CREATE TABLE turnstile (
 ) WITH (
     KAFKA_TOPIC = 'com.cta.v1.turnstile_events',
     VALUE_FORMAT = 'Avro',
-    KEY = 'station_id'
+    KEY= 'station_id'
 );
 
 CREATE TABLE turnstile_summary
 WITH (VALUE_FORMAT = 'JSON') AS
-    SELECT COUNT(*) FROM turnstile
+    SELECT STATION_ID, COUNT(station_id) AS count FROM turnstile
     GROUP BY station_id;
 """
 
 
 def execute_statement():
     """Executes the KSQL statement against the KSQL API"""
+
+    print("Creating KSQL table")
+
     if topic_check.topic_exists("TURNSTILE_SUMMARY") is True:
         return
 
@@ -51,8 +54,10 @@ def execute_statement():
     try:
         resp.raise_for_status()
     except:
-        logger.error(f"Failed to send data to Connector {json.dumps(resp.json(), indent=2)}")
+        print(f"Failed to send data to Connector {json.dumps(resp.json(), indent=2)}")
         return
+
+    print("KSQL Statement sent with success")
 
 
 if __name__ == "__main__":

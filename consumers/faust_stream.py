@@ -36,7 +36,7 @@ app = faust.App("stations-stream", broker="kafka://localhost:9092", store="memor
 topic = app.topic("com.cta.v1.postgres.stations", value_type=Station)
 
 # Output Kafka Topic
-out_topic = app.topic("com.cta.v1.stations.resumed", partitions=1)
+out_topic = app.topic("org.chicago.cta.stations.table.v1", partitions=1)
 
 # Faust Table
 table = app.Table(
