@@ -104,7 +104,7 @@ class Producer:
             # Maybe this is not the best idea to wait here.
             # However, better than not having any errors
             # Any suggestions on how to handle this ?
-            time.sleep(2.0)
+            time.sleep(0.1)
             if not self.topic_exists():
                 logger.error(f"Could not create topic {self.topic_name}")
 

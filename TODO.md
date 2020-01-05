@@ -16,15 +16,15 @@ To accomplish this, you must complete the following tasks:
 	* `train_status`
 	* `prev_station_id`
 	* `prev_direction`
-1. Complete the code in `producers/models/station.py` so that:
+1. Complete the code in `producers/models/station.py` so that: - **DONE**
 	* A topic is created for each station in Kafka to track the arrival events
 	* The station emits an `arrival` event to Kafka whenever the `Station.run()` function is called.
 	* Ensure that events emitted to kafka are paired with the Avro `key` and `value` schemas
-1. Define a `value` schema for the turnstile event in `producers/models/schemas/turnstile_value.json` with the following attributes
+1. Define a `value` schema for the turnstile event in `producers/models/schemas/turnstile_value.json` with the following attributes - **DONE**
 	* `station_id`
 	* `station_name`
 	* `line`
-1. Complete the code in `producers/models/turnstile.py` so that:
+1. Complete the code in `producers/models/turnstile.py` so that: - **DONE**
 	* A topic is created for each turnstile for each station in Kafka to track the turnstile events
 	* The station emits a `turnstile` event to Kafka whenever the `Turnstile.run()` function is called.
 	* Ensure that events emitted to kafka are paired with the Avro `key` and `value` schemas
