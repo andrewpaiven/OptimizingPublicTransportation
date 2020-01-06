@@ -30,39 +30,28 @@ class KafkaConsumer:
         self.consume_timeout = consume_timeout
         self.offset_earliest = offset_earliest
 
-        #
-        #
-        # TODO: Configure the broker properties below. Make sure to reference the project README
-        # and use the Host URL for Kafka and Schema Registry!
-        #
-        #
         self.broker_properties = {
             'bootstrap.servers': 'localhost:9092',
             'client.id': 'cta-consumer',
             'group.id': f"webapp_consumer",
         }
 
-        # TODO: Create the Consumer, using the appropriate type.
+        # Switch between Avro or standard consumer
         if is_avro is True:
             self.broker_properties["schema.registry.url"] = "http://localhost:8081"
             self.consumer = AvroConsumer(self.broker_properties)
         else:
             self.consumer = Consumer(self.broker_properties)
 
-        #
-        #
-        # TODO: Configure the AvroConsumer and subscribe to the topics. Make sure to think about
-        # how the `on_assign` callback should be invoked.
-        #
-        #
         self.consumer.subscribe([self.topic_name_pattern], on_assign=self.on_assign)
 
     def on_assign(self, consumer, partitions):
-        """Callback for when topic assignment takes place"""
-        # TODO: If the topic is configured to use `offset_earliest` set the partition offset to
-        # the beginning or earliest
+
         logger.info(f"Assigning partitions to consumer {consumer}")
+
         for partition in partitions:
+
+            # Process Topics marked to be processed since beginning
             if self.offset_earliest:
                 partition.offset = confluent_kafka.OFFSET_BEGINNING
 

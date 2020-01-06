@@ -81,12 +81,12 @@ To accomplish this, you must complete the following tasks:
 * Made a mistake in table creation? `DROP TABLE <your_table>`. If the CLI asks you to terminate a running query, you can `TERMINATE <query_name>`
 
 
-### Step 6: Create Kafka Consumers
+### Step 6: Create Kafka Consumers - **DONE**
 With all of the data in Kafka, our final task is to consume the data in the web server that is going to serve the transit status pages to our commuters.
 
 To accomplish this, you must complete the following tasks:
 
-1. Complete the code in `consumers/consumer.py`
-1. Complete the code in `consumers/models/line.py`
-1. Complete the code in `consumers/models/weather.py`
-1. Complete the code in `consumers/models/station.py`
+1. Complete the code in `consumers/consumer.py` - **DONE**
+1. Complete the code in `consumers/models/line.py` - **DONE**
+1. Complete the code in `consumers/models/weather.py` - **DONE**
+1. Complete the code in `consumers/models/station.py` - **DONE**
